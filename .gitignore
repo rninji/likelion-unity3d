@@ -82,3 +82,6 @@ crashlytics-build.properties
 
 # idea
 *.idea
+
+# Resources
+/[Aa]ssets/1.\ Data Structrue/99.\ Resources/*
