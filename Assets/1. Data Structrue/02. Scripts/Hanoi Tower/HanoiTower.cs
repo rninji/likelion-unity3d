@@ -14,7 +14,7 @@ public class HanoiTower : MonoBehaviour
     public static GameObject selectedDonut;
     public static bool isSelected;
 
-    IEnumerator Start()
+    IEnumerator CreateDonuts()
     {
         for (int i = (int)hanoiLevel -1; i >= 0; i--)
         {
@@ -35,6 +35,26 @@ public class HanoiTower : MonoBehaviour
             
             isSelected = false;
             selectedDonut = null;
+        }
+    }
+
+    void Start()
+    {
+        StartCoroutine(CreateDonuts()); // 도넛 생성
+        HanoiTowerFunc((int)hanoiLevel, 0, 1, 2); // 해결 재귀 함수
+    }
+
+    public void HanoiTowerFunc(int n, int from, int temp, int to)
+    {
+        if (n == 0) return;
+        
+        if (n == 1)
+            Debug.Log($"{n}번 원반을 {from}에서 {to}로 이동");
+        else
+        {
+            HanoiTowerFunc(n-1, from, to, temp);
+            Debug.Log($"{n}번 원반을 {from}에서 {to}로 이동");
+            HanoiTowerFunc(n-1, from, to, temp);
         }
     }
 }
