@@ -9,6 +9,7 @@ public class HanoiTower : MonoBehaviour
 
     public GameObject[] donutPrefabs;
     public BoardBar[] bars;
+    public static BoardBar currBar;
 
     public static GameObject selectedDonut;
     public static bool isSelected;
@@ -24,5 +25,16 @@ public class HanoiTower : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            currBar.barStack.Push(selectedDonut);
+            
+            isSelected = false;
+            selectedDonut = null;
+        }
     }
 }
