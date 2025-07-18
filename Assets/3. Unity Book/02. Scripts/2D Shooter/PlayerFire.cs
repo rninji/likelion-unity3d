@@ -35,7 +35,6 @@ public class PlayerFire : Singleton<PlayerFire>
 #if UNITY_STANDARDALONE || UNITY_EDITOR
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("마우스 클릭");
             // 큐
             if (bulletObjectPool.Count > 0)
             {
