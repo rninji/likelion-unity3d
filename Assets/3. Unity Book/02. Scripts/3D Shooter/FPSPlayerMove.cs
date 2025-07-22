@@ -19,9 +19,13 @@ public class FPSPlayerMove : MonoBehaviour
     public Slider hpSlider;
 
     public GameObject hitEffect;
+
+    private Animator anim;
+    
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        anim = GetComponentInChildren<Animator>();
     }
     void Update()
     {
@@ -33,6 +37,8 @@ public class FPSPlayerMove : MonoBehaviour
 
         Vector3 dir = new Vector3(h, 0, v); // 크기와 방향이 있는 벡터
         dir = dir.normalized; // 방향만 있는 벡터
+        
+        anim.SetFloat("MoveMotion", dir.magnitude);
 
         // 카메라의 Transform 기준으로 변환
         dir = Camera.main.transform.TransformDirection(dir);
