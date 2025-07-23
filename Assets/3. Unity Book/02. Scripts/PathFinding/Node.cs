@@ -45,7 +45,13 @@ public class Node : IComparable<Node>
         float otherF = node.GetFCost();
 
         if (myF < otherF) return -1;
-        else if (myF > otherF) return -1;
+        if (myF > otherF) return 1;
+
+        if (estimateCost < node.estimateCost)
+            return -1;
+        if (estimateCost > node.estimateCost)
+            return 1;
+
         return 0;
     }
 }
