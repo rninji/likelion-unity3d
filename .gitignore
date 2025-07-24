@@ -88,3 +88,7 @@ crashlytics-build.properties
 /[Aa]ssets/1.\ Data Structrue/99.\ Resources/*
 /[Aa]ssets/2.\ Algorithm/99.\ Resources/*
 /[Aa]ssets/3.\ Unity Book/99.\ Resources/*
+
+# AI Navigation Samples
+/[Aa]ssets/Samples/*
+/[Aa]ssets/Samples.*

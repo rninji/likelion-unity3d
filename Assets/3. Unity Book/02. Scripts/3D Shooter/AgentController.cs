@@ -1,27 +1,28 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem.Android;
 
 public class AgentController : MonoBehaviour
 {
-    public Transform player;
     private NavMeshAgent agent;
-
     public Transform[] points;
     public int index;
-    
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.SetDestination(points[index].position);
     }
 
     void Update()
     {
-        agent.SetDestination(points[index].position);
-        if (agent.remainingDistance <= 2f) // 목적지 거리값이 2 이하일 경우 도착 판정 후 다음 목적지로 변경
+        if (Vector3.Distance(transform.position, points[index].position) < 1.5f)
         {
             index++;
-            if (index >= points.Length) index = 0; // 루프
+            if (index >= points.Length)
+            {
+                index = 0;
+            }
+            agent.SetDestination(points[index].position);
         }
     }
 }

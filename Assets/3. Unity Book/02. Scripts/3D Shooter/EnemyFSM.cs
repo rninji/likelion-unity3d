@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class EnemyFSM : MonoBehaviour
@@ -33,6 +34,7 @@ public class EnemyFSM : MonoBehaviour
     public Slider hpSplider;
 
     private Animator anim;
+    private NavMeshAgent smith;
     
     void Start()
     {
@@ -42,6 +44,7 @@ public class EnemyFSM : MonoBehaviour
         originPos = transform.position;
         originRot = transform.rotation;
         anim = transform.GetComponentInChildren<Animator>();
+        smith = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
@@ -101,9 +104,12 @@ public class EnemyFSM : MonoBehaviour
         // 플레이어를 향해 이동
         else
         {
-            Vector3 dir = (player.position - transform.position).normalized;
-            cc.Move(dir * moveSpeed * Time.deltaTime);
-            transform.forward = dir;
+            // 이동 멈추고 경로를 초기화
+            smith.isStopped = true;
+            smith.ResetPath();
+            
+            smith.stoppingDistance = attackDistance;
+            smith.SetDestination(player.position);
         }
     }
 
@@ -140,13 +146,15 @@ public class EnemyFSM : MonoBehaviour
         // 원래 위치가 아닌 경우 원래 위치로 이동
         if (Vector3.Distance(transform.position, originPos) > 0.1f)
         {
-            Vector3 dir = (originPos - transform.position).normalized;
-            cc.Move(dir * moveSpeed * Time.deltaTime);
-            transform.forward = dir;
+            smith.SetDestination(originPos);
+            smith.stoppingDistance = 0f;
         }
         // 원래 위치로 돌아간 경우 hp 회복 후 Return -> Idle
         else
         {
+            smith.isStopped = true;
+            smith.ResetPath();
+            
             transform.position = originPos;
             transform.rotation = originRot;
             hp = 15;
@@ -161,6 +169,9 @@ public class EnemyFSM : MonoBehaviour
             return;
         
         hp -= hitPower;
+
+        smith.isStopped = true;
+        smith.ResetPath();
 
         if (hp > 0)
         {
