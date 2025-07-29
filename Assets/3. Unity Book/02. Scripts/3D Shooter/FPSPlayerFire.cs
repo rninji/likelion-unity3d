@@ -32,6 +32,8 @@ public class FPSPlayerFire : MonoBehaviour
     public GameObject weapon01_R;
     public GameObject weapon02_R;
 
+    public GameObject crosshair02_zoom;
+
     void Start()
     {
         ps = bulletEffect.GetComponent<ParticleSystem>();
@@ -43,8 +45,7 @@ public class FPSPlayerFire : MonoBehaviour
     {
         if (FPSGameManager.Instance.gState != FPSGameManager.GameState.Run) 
             return;
-        
-        // 총 발사
+        #region 마우스 좌클릭 -> 총 발사
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
@@ -73,8 +74,10 @@ public class FPSPlayerFire : MonoBehaviour
             // 이펙트 실행
             StartCoroutine(ShootEffectOn(0.05f));
         }
+        #endregion
+
+        #region 마우스 우클릭 -> 수류탄 투척/스나이퍼 모드
         
-        // 수류탄 투척
         if (Input.GetMouseButtonDown(1))
         {
             switch (wMode)
@@ -87,13 +90,18 @@ public class FPSPlayerFire : MonoBehaviour
                     rb.AddForce(Camera.main.transform.forward * throwPower, ForceMode.Impulse);
                     break;
                 case WeaponMode.Sniper:
-                    Camera.main.fieldOfView = ZoomMode ? 60f : 15f;
                     ZoomMode = !ZoomMode;
+                    
+                    Camera.main.fieldOfView = ZoomMode ? 15f : 60f;
+                    
+                    crosshair02_zoom.SetActive(ZoomMode);
+                    crosshair02.SetActive(!ZoomMode);
+
+                    
                     break;
             }
-            
-            
         }
+        #endregion
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
@@ -107,6 +115,7 @@ public class FPSPlayerFire : MonoBehaviour
             crosshair02.SetActive(false);
             weapon01_R.SetActive(true);
             weapon02_R.SetActive(false);
+            crosshair02_zoom.SetActive(false);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
