@@ -92,3 +92,7 @@ crashlytics-build.properties
 # AI Navigation Samples
 /[Aa]ssets/Samples/*
 /[Aa]ssets/Samples.*
+
+# TerrainSampleAssets
+/[Aa]ssets/TerrainSampleAssets/*
+/[Aa]ssets/TerrainSampleAssets.*
