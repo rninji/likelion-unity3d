@@ -1,13 +1,19 @@
+using System;
 using UnityEngine;
 
 public class StudySingleton : MonoBehaviour
 {
-    public static StudySingleton instance;
+    public static StudySingleton Instance { get; private set; }
 
-    public int number;
-
-    void Start()
+    private void Awake()
     {
-        instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
