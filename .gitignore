@@ -85,6 +85,7 @@ crashlytics-build.properties
 
 # Resources
 /[Aa]ssets/Resources/*
+/[Aa]ssets/Downloaded/*
 /[Aa]ssets/1.\ Data Structrue/99.\ Resources/*
 /[Aa]ssets/2.\ Algorithm/99.\ Resources/*
 /[Aa]ssets/3.\ Unity Book/99.\ Resources/*
