@@ -8,12 +8,14 @@ namespace Farm
     public class PlayerController : MonoBehaviour
     {
         private Animator anim;
-        private PlayerInput playerInput;
-
         private CharacterController cc;
+        
         private Vector3 moveInput;
+        private bool isRun;
 
-        private float moveSpeed = 2f;
+        private float currentSpeed;
+        private float walkSpeed = 2f;
+        private float runSpeed = 5f;
         private float turnSpeed = 10f;
 
         private void Start()
@@ -24,7 +26,8 @@ namespace Farm
 
         private void Update()
         {
-            cc.Move(moveInput * moveSpeed * Time.deltaTime);
+            cc.Move(moveInput * currentSpeed * Time.deltaTime);
+            SetAnimation();
             Turn();
         }
 
@@ -42,6 +45,27 @@ namespace Farm
                 
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRot, turnSpeed * Time.deltaTime);
             }
+        }
+
+        void OnRun(InputValue value)
+        {
+            isRun = value.isPressed;
+        }
+
+        void SetAnimation()
+        {
+            float targetValue = 0;
+
+            if (moveInput != Vector3.zero)
+            {
+                targetValue = isRun ? 1f : 0.5f;
+                currentSpeed = isRun ? runSpeed : walkSpeed;
+            }
+
+            float animValue = anim.GetFloat("Move");
+            animValue = Mathf.Lerp(animValue, targetValue, 10f * Time.deltaTime);
+
+            anim.SetFloat("Move", animValue);
         }
     }
 }
