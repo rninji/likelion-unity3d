@@ -7,6 +7,9 @@ namespace Farm
 {
     public class GameManager : Singleton<GameManager>
     {
+        public FieldManager field;
+        public UIManager ui;
+        public ItemManager item;
         public CameraState cameraState;
         [SerializeField] private CinemachineClearShot clearShot;
 

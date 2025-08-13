@@ -98,3 +98,7 @@ crashlytics-build.properties
 # TerrainSampleAssets
 /[Aa]ssets/TerrainSampleAssets/*
 /[Aa]ssets/TerrainSampleAssets.*
+
+# TextMesh Pro
+/[Aa]ssets/TextMesh\ Pro/*
+/[Aa]ssets/TextMesh\ Pro.*

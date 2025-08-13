@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Billboard : MonoBehaviour
+public class BillboardCamera : MonoBehaviour
 {
     public Transform target;
 

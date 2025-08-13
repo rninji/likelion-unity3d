@@ -10,6 +10,7 @@ public class FieldEvent : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Farm.GameManager.Instance.SetCameraState(CameraState.Field);
+            Farm.GameManager.Instance.ui.ActivateFieldUI(true);
         }
     }
 
@@ -18,6 +19,7 @@ public class FieldEvent : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Farm.GameManager.Instance.SetCameraState(CameraState.Outside);
+            Farm.GameManager.Instance.ui.ActivateFieldUI(false);
         }
     }
 }

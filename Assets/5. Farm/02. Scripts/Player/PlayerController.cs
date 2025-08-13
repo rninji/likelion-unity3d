@@ -7,6 +7,8 @@ namespace Farm
 {
     public class PlayerController : MonoBehaviour
     {
+        private const float GRAVITY = -9.8f;
+        
         private Animator anim;
         private CharacterController cc;
         
@@ -17,6 +19,7 @@ namespace Farm
         private float walkSpeed = 2f;
         private float runSpeed = 5f;
         private float turnSpeed = 10f;
+        private Vector3 velocity;
 
         private void Start()
         {
@@ -26,7 +29,9 @@ namespace Farm
 
         private void Update()
         {
-            cc.Move(moveInput * currentSpeed * Time.deltaTime);
+            velocity.y += GRAVITY;
+            var dir = moveInput * currentSpeed + Vector3.up * velocity.y;
+            cc.Move(dir * Time.deltaTime);
             SetAnimation();
             Turn();
         }
