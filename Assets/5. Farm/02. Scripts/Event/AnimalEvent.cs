@@ -1,16 +1,14 @@
-using System;
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class FieldEvent : MonoBehaviour
+public class AnimalEvent : MonoBehaviour
 {
     [SerializeField] private CinemachineClearShot clearShot;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Farm.GameManager.Instance.SetCameraState(CameraState.Field);
-            Farm.GameManager.Instance.ui.ActivateFieldUI(true);
+            Farm.GameManager.Instance.SetCameraState(CameraState.Animal);
         }
     }
 
@@ -19,8 +17,6 @@ public class FieldEvent : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Farm.GameManager.Instance.SetCameraState(CameraState.Outside);
-            Farm.GameManager.Instance.ui.ActivateFieldUI(false);
-            Farm.GameManager.Instance.field.SetState(FieldManager.FieldState.None);
         }
     }
 }
