@@ -10,7 +10,7 @@ public class HouseEvent : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Farm.GameManager.Instance.SetCameraState(CameraState.Field);
+            Farm.GameManager.Instance.SetCameraState(CameraState.House);
             houseTop.SetActive(false);
         }
     }
