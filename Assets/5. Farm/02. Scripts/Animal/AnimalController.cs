@@ -48,4 +48,15 @@ public class AnimalController : MonoBehaviour
         if (NavMesh.SamplePosition(randomDir, out hit, wanderRadius, NavMesh.AllAreas))
             agent.SetDestination(hit.position);
     }
+    
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            AnimalEvent.failAction?.Invoke();
+    
+            Debug.Log("동물 피하기 실패");
+        }
+    }
+
 }
