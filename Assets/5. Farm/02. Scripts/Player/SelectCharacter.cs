@@ -57,6 +57,7 @@ public class SelectCharacter : MonoBehaviour
 
     private void Select()
     {
+        LoadSceneManager.Instance.SetCharacterIndex(currentIndex);
         StartCoroutine(SelectRoutine());
     }
 
@@ -65,9 +66,7 @@ public class SelectCharacter : MonoBehaviour
         anims[currentIndex].SetTrigger("Select");
 
         yield return new WaitForSeconds(3f);
-        Fade.onFadeAction?.Invoke(3f, Color.white, true, null);
         
-        yield return new WaitForSeconds(3.5f);
-        // Load Scene
+        LoadSceneManager.Instance.OnLoadScene();
     }
 }

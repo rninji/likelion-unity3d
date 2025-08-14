@@ -21,9 +21,12 @@ namespace Farm
         private float turnSpeed = 10f;
         private Vector3 velocity;
 
-        private void Start()
+        private void Awake()
         {
-            anim = GetComponent<Animator>();
+            int characterIndex = LoadSceneManager.Instance.characterIndex;
+            transform.GetChild(characterIndex).gameObject.SetActive(true);
+            anim = transform.GetChild(characterIndex).GetComponent<Animator>();
+            
             cc = GetComponent<CharacterController>();
         }
 
